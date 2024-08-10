@@ -1,0 +1,14 @@
+//Today problem is based on the rotation of the linked list which i have done in striver dsa sheet also.
+//I have two appraoches 
+1: Using the dummynodes;
+ Time Complexity:O[n]
+ Space Complexity:O[n]
+
+ 2:Using the last node to head pointing technique
+ Time Complexity:O(N)
+ SpacE Complexity:O(1)
+ https://www.geeksforgeeks.org/problems/rotate-a-linked-list/1 <--------------------here is linf of the problem that i have solved . Copy and paste the provided link.
+
+ For more Approaches :
+ https://www.geeksforgeeks.org/rotate-a-linked-list/ <------------------------this is the link 
+ 
