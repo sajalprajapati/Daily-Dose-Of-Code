@@ -1,0 +1,42 @@
+//Today problem is Job Sequencing Problem.
+This is the problem which can be solved by Greedy Problem.
+Maximum profit can be also found by the binary Search.
+
+Job Sequencing Problem.
+{Given a set of n jobs where each jobi has a deadline and profit associated with it.
+
+Each job takes 1 unit of time to complete and only one job can be scheduled at a time. We earn the profit associated with a job if and only if the job is completed by its deadline.
+
+Find the number of jobs done and the maximum profit.
+
+Note: Jobs will be given in the form (Jobid, Deadline, Profit) associated with that Job. Deadline of the job is the time on or before which job needs to be completed to earn the profit.}
+
+bool static comp(Job a, Job b){
+        return a.profit>b.profit;
+    }
+    
+    vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        // your code here
+        int max_dead=0;
+        for(int i=0; i<n; i++){
+            max_dead=max(max_dead, arr[i].dead);
+        }
+        sort(arr, arr+n, comp);
+        vector<bool>deads(max_dead+1, 0);
+        int tot_profit=0, tot_job=0;
+        
+        for(int i=0; i<n; i++){
+            for(int j=arr[i].dead; j>0; j--){
+                if(!deads[j]){
+                    deads[j]=1;
+                    tot_profit+=arr[i].profit;
+                    tot_job++;
+                    break;
+                }
+            }
+            if(tot_job==max_dead) break;
+        }
+        
+        return {tot_job, tot_profit};
+    } 
