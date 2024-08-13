@@ -1,0 +1,41 @@
+Today problem is associated with the binary search .
+To grasp the intuition,think on the multipying of the from 1 to given number.
+
+
+Problem Description:
+Input: n = 5
+Output: 2
+Explanation: Since, 5 is not a perfect square, floor of square_root of 5 is 2.
+
+Given an integer n, find the square root of n. If n is not a perfect square, then return the floor value.
+
+Floor value of any number is the greatest Integer which is less than or equal to that number
+
+
+Solution for this would be :
+long long int floorSqrt(long long int n) {
+        
+        
+        if(n==0 or n==1)
+        return n;
+        
+        long long lower=1,higher=n-1,answer;
+        while(lower<=higher)
+        {
+            long long middle=lower+(higher-lower)/2;
+            
+            if(middle*middle==n) return middle;
+            
+            else if(middle*middle<n)
+            {
+                lower=middle+1;
+                answer=middle;
+            }
+            else
+            {
+                higher=middle-1;
+            }
+        }
+        
+        return answer;
+    }
