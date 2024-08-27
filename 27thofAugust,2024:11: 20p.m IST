@@ -1,0 +1,71 @@
+Today problem is :
+Finding the maximum difference in the array.
+class Solution {
+  public:
+    /*You are required to complete this method */
+    void nearestLeftSmaller(vector<int>& NLS, vector<int>& arr) 
+{
+    stack<int> stk;
+    for (int i = 0; i < arr.size(); i++) 
+    {
+        while (!stk.empty() && arr[i] <= stk.top()) 
+        {
+            stk.pop();
+        }
+
+        if (stk.empty()) 
+        {
+            NLS[i] = 0;  // If there's no smaller element, set NLS to 0
+        } 
+        else 
+        {
+            NLS[i] = stk.top();
+        }
+
+        stk.push(arr[i]);
+    }
+}
+
+void nearestRightSmaller(vector<int>& NRS, vector<int>& arr) 
+{
+    stack<int> stk;
+    for (int i = arr.size() - 1; i >= 0; i--) 
+    {
+        while (!stk.empty() && arr[i] <= stk.top()) 
+        {
+            stk.pop();
+        }
+
+        if (stk.empty()) 
+        {
+            NRS[i] = 0;  // If there's no smaller element, set NRS to 0
+        } 
+        else 
+        {
+            NRS[i] = stk.top();
+        }
+
+        stk.push(arr[i]);
+    }
+}
+
+int findMaxDiff(vector<int>& arr) 
+{
+    int n = arr.size();
+    vector<int> NLS(n);
+    vector<int> NRS(n);
+
+    nearestLeftSmaller(NLS, arr);
+    nearestRightSmaller(NRS, arr);
+
+    int maximum = 0;
+
+    for (int i = 0; i < arr.size(); i++) 
+    {
+        maximum = max(maximum, abs(NLS[i] - NRS[i]));
+    }
+
+    return maximum;
+}
+
+};
