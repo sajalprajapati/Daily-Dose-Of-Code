@@ -1,0 +1,50 @@
+// User function Template for C++
+
+class Solution{
+public:
+   vector<vector<int>> res;
+
+bool isSafe(int row, int col, int n, vector<int>& leftDiagonal, vector<int>& rightDiagonal, vector<int>& column) {
+    // Check if any queen is already placed in the same column or diagonals
+    if (column[row] || leftDiagonal[row - col + n - 1] || rightDiagonal[row + col]) {
+        return false;
+    }
+    return true;
+}
+
+void solve(int col, int n, vector<int>& pos, vector<int>& leftDiagonal, vector<int>& rightDiagonal, vector<int>& column) {
+    if (col == n) {
+        res.push_back(pos);
+        return;
+    }
+
+    for (int row = 0; row < n; ++row) {
+        if (isSafe(row, col, n, leftDiagonal, rightDiagonal, column)) {
+            // Place the queen
+            pos.push_back(row + 1);
+            column[row] = 1;
+            leftDiagonal[row - col + n - 1] = 1;
+            rightDiagonal[row + col] = 1;
+
+            // Recurse to place the rest of the queens
+            solve(col + 1, n, pos, leftDiagonal, rightDiagonal, column);
+
+            // Backtrack
+            pos.pop_back();
+            column[row] = 0;
+            leftDiagonal[row - col + n - 1] = 0;
+            rightDiagonal[row + col] = 0;
+        }
+    }
+}
+
+vector<vector<int>> nQueen(int n) {
+    res.clear(); // Clear previous results
+    vector<int> pos; // To store the positions of queens
+    vector<int> leftDiagonal(2 * n - 1, 0);
+    vector<int> rightDiagonal(2 * n - 1, 0);
+    vector<int> column(n, 0);
+    solve(0, n, pos, leftDiagonal, rightDiagonal, column);
+    return res;
+}
+};
