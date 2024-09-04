@@ -1,0 +1,9 @@
+class Solution{
+	public:
+		int nthStair(int n){
+		    //  Code here
+		    int ans=0;
+            ans=n/2;
+            return ans+1;
+		}
+};
