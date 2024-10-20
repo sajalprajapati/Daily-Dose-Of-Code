@@ -1,0 +1,32 @@
+ DLLNode *sortAKSortedDLL(DLLNode *head, int k) {
+        // code here
+        if(!head || !head->next ) return head;
+        priority_queue<int,vector<int>,greater<int>> pq;
+        int i = 0 ;
+        while(i<k+1 && head){
+            pq.push(head->data);
+            head = head->next;
+            i++;
+        }
+        DLLNode* newHead = nullptr, *last = nullptr;
+        while(!pq.empty()){
+            DLLNode * node = new DLLNode(pq.top());
+            if(!newHead){
+                newHead = node;
+                newHead->prev = nullptr;
+                last = node;
+            }
+            else{
+                last ->next = node;
+                node->prev = last;
+                last = node;
+            }
+            pq.pop();
+            if(head){
+                pq.push(head->data);
+                head = head->next;
+            }   
+        }
+        last ->next = nullptr;
+        return newHead;
+    }
